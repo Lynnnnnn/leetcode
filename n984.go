@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -31,6 +30,6 @@ func strWithout3a3b(A int, B int) string {
 	return result
 }
 
-func main() {
-	fmt.Printf(strWithout3a3b(24, 11))
-}
+// func main() {
+// 	fmt.Printf(strWithout3a3b(24, 11))
+// }
