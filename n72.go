@@ -31,10 +31,6 @@
 
 package main
 
-import (
-	"fmt"
-)
-
 func minDistance(word1 string, word2 string) int {
 	len1 := len(word1) + 1
 	len2 := len(word2) + 1
@@ -76,6 +72,6 @@ func minDistance(word1 string, word2 string) int {
 	return int(dp[len1-1][len2-1])
 }
 
-func main() {
-	fmt.Printf("%d", minDistance("intention", "execution"))
-}
+// func main() {
+// 	fmt.Printf("%d", minDistance("intention", "execution"))
+// }
