@@ -12,6 +12,6 @@ func main() {
 	// result := coinChange([]int{186, 419, 83, 408}, 6249)
 	// result := coinChange([]int{83, 186}, 1265)
 	// result := longestConsecutive([]int{1, 2, 0, 1})
-	result := countBinarySubstrings("00110011")
+	result := isOneBitCharacter([]int{1, 1, 0})
 	fmt.Println(result)
 }
