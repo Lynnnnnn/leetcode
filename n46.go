@@ -17,5 +17,51 @@
 
 package main
 
-func permute(nums []int) {
+func permute(nums []int) [][]int {
+	var res [][]int
+
+	if len(nums) == 0 {
+		return [][]int{[]int{}}
+	}
+
+	for i, v := range nums {
+		if i == 0 {
+			res = append(res, []int{v})
+		} else {
+			res = newResult(res, v)
+		}
+	}
+
+	return res
+}
+
+func newResult(list [][]int, element int) [][]int {
+	var res [][]int
+
+	for _, v := range list {
+		tmp := add(v, element)
+		res = append(res, tmp...)
+	}
+
+	return res
+}
+
+func add(list []int, element int) [][]int {
+	var res [][]int
+
+	list = append(list, element)
+
+	for i := len(list) - 1; i > 0; i-- {
+		newList := make([]int, len(list))
+		copy(newList, list)
+		res = append(res, newList)
+
+		tmp := list[i-1]
+		list[i-1] = list[i]
+		list[i] = tmp
+	}
+
+	res = append(res, list)
+
+	return res
 }
