@@ -16,23 +16,41 @@
 
 package interview
 
+// func exchange(nums []int) []int {
+// 	var n1 []int
+// 	var n2 []int
+
+// 	for _, n := range nums {
+// 		if n%2 == 0 {
+// 			n2 = append(n2, n)
+// 		} else {
+// 			n1 = append(n1, n)
+// 		}
+// 	}
+
+// 	n1 = append(n1, n2...)
+
+// 	return n1
+// }
+
+//首尾指针
 func exchange(nums []int) []int {
-	if len(nums) == 1 {
-		return nums
+	start := 0
+	end := len(nums) - 1
+
+	for start < end {
+		for start < len(nums) && nums[start]%2 == 1 {
+			start++
+		}
+
+		for end >= 0 && nums[end]%2 == 0 {
+			end--
+		}
+
+		if start < end {
+			nums[start], nums[end] = nums[end], nums[start]
+		}
 	}
 
-	res := make([]int, len(nums))
-
-	leftStart := 0
-	rightStart := len(nums) / 2
-
-	for i := 0; i < len(nums); i += 2 {
-		res[leftStart] = nums[i]
-		res[rightStart] = nums[i+1]
-
-		leftStart++
-		rightStart++
-	}
-
-	return res
+	return nums
 }
