@@ -23,44 +23,71 @@ push(5), pop() -> 5, pop() -> 3, pop() -> 2, pop() -> 1
 
 package interview
 
+// func validateStackSequences(pushed []int, popped []int) bool {
+// 	indexMap := map[int]int{}
+// 	flag := make([]int, len(pushed))
+
+// 	for i, num := range pushed {
+// 		indexMap[num] = i
+// 	}
+
+// 	lastIndex := -1
+
+// 	for i, num := range popped {
+// 		if i == 0 {
+// 			lastIndex = indexMap[num]
+// 			flag[lastIndex] = 1
+// 			continue
+// 		}
+
+// 		if indexMap[num] > lastIndex {
+// 			lastIndex = indexMap[num]
+// 			flag[lastIndex] = 1
+// 			continue
+// 		}
+
+// 		j := lastIndex - 1
+// 		for ; j >= 0; j-- {
+// 			if flag[j] == 0 {
+// 				break
+// 			}
+// 		}
+
+// 		if num == pushed[j] {
+// 			lastIndex = j
+// 			flag[lastIndex] = 1
+// 			continue
+// 		} else {
+// 			return false
+// 		}
+
+// 	}
+
+// 	return true
+// }
+
 func validateStackSequences(pushed []int, popped []int) bool {
-	indexMap := map[int]int{}
-	flag := make([]int, len(pushed))
+	tmp := make([]int, 0)
+	popIndex := 0
 
 	for i, num := range pushed {
-		indexMap[num] = i
+		if num == popped[popIndex] {
+			popIndex++
+			for len(tmp) != 0 && (tmp[len(tmp)-1] == popped[popIndex]) {
+				tmp = tmp[0 : len(tmp)-1]
+				popIndex++
+			}
+		} else {
+			tmp = append(tmp, num)
+		}
 	}
 
-	lastIndex := -1
-
-	for i, num := range popped {
-		if i == 0 {
-			lastIndex = indexMap[num]
-			flag[lastIndex] = 1
-			continue
-		}
-
-		if indexMap[num] > lastIndex {
-			lastIndex = indexMap[num]
-			flag[lastIndex] = 1
-			continue
-		}
-
-		j := lastIndex - 1
-		for ; j >= 0; j-- {
-			if flag[j] == 0 {
-				break
-			}
-		}
-
-		if num == pushed[j] {
-			lastIndex = j
-			flag[lastIndex] = 1
+	for ; popIndex < len(popped); popIndex++ {
+		if popped[popIndex] == tmp[len(tmp)-1] {
 			continue
 		} else {
 			return false
 		}
-
 	}
 
 	return true
