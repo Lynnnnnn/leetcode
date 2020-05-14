@@ -22,37 +22,65 @@
 
 package interview
 
-func maxProfit(prices []int) int {
+// func maxProfit(prices []int) int {
+// 	if len(prices) == 0 {
+// 		return 0
+// 	}
+
+// 	max := 0
+
+// 	i := 0
+
+// 	for ; i < len(prices)-1; i++ {
+// 		if prices[i] < prices[i+1] {
+// 			break
+// 		}
+// 	}
+
+// 	if i == len(prices)-1 {
+// 		return 0
+// 	}
+
+// 	min := prices[i]
+
+// 	for i = i + 1; i < len(prices); i++ {
+// 		if prices[i]-min > max {
+// 			max = prices[i] - min
+// 			continue
+// 		}
+
+// 		if prices[i] < min {
+// 			min = prices[i]
+// 		}
+// 	}
+
+// 	return max
+// }
+
+func maxProfitDP(prices []int) int {
 	if len(prices) == 0 {
 		return 0
 	}
 
-	max := 0
+	dp := make([]int, len(prices))
+	dp[0] = 0
+	min := prices[0]
 
-	i := 0
-
-	for ; i < len(prices)-1; i++ {
-		if prices[i] < prices[i+1] {
-			break
-		}
-	}
-
-	if i == len(prices)-1 {
-		return 0
-	}
-
-	min := prices[i]
-
-	for i = i + 1; i < len(prices); i++ {
-		if prices[i]-min > max {
-			max = prices[i] - min
+	for i := 1; i < len(prices); i++ {
+		if prices[i] < min {
+			min = prices[i]
+			dp[i] = dp[i-1]
 			continue
 		}
 
-		if prices[i] < min {
-			min = prices[i]
+		profit := prices[i] - min
+
+		if profit > dp[i-1] {
+			dp[i] = profit
+		} else {
+			dp[i] = dp[i-1]
 		}
 	}
 
-	return max
+	return dp[len(prices)-1]
 }
