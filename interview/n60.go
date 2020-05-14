@@ -28,12 +28,12 @@ func twoSum(n int) []float64 {
 	result := make([]float64, 5*n+1)
 
 	for i := 0; i < len(last); i++ {
-		result[i] = float64(1) / 6 * last[i]
+		result[i] = float64(1)/6 * last[i]
 	}
 
 	for i := 1; i < 6; i++ {
 		for j := 0; j < len(last); j++ {
-			result[i+j] += float64(1) / 6 * last[i]
+			result[i+j] += float64(1) / 6 * last[j]
 		}
 	}
 
